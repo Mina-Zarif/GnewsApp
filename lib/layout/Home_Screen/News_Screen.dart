@@ -9,9 +9,7 @@ class News_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit()..getBusiness()..getSports()..getScience(),
-      child: BlocConsumer<AppCubit, AppState>(
+    return BlocConsumer<AppCubit, AppState>(
           listener: (context, state) {},
           builder: (context, state) {
             var cubit = AppCubit.get(context);
@@ -35,7 +33,6 @@ class News_Screen extends StatelessWidget {
                     child: IconButton(
                       onPressed: (){
                         AppCubit.get(context).changeTheme();
-                        print(cubit.isDark);
                       },
                       icon: Icon(Icons.brightness_4_outlined),
                       iconSize: 25,
@@ -52,7 +49,7 @@ class News_Screen extends StatelessWidget {
               ),
               body: cubit.Screens[cubit.currentIndex],
             );
-          }),
+          }
     );
   }
 }

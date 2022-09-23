@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:gnews/shared/cubit/cubit.dart';
 
-Widget bulidItem( article,context) {
+Widget bulidItem(article, context) {
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Row(
@@ -16,9 +16,12 @@ Widget bulidItem( article,context) {
             ),
             image: DecorationImage(
               image: NetworkImage(
-                  // 'https://avatars.githubusercontent.com/u/92533130?v=4',
-                '${article['urlToImage']}',
-              ),
+                  (
+                      article['urlToImage'] == null ||
+                      article['urlToImage'] == ' '
+
+                  ? 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_01/2705191/nbc-social-default.png'
+                  : article['urlToImage'])),
               fit: BoxFit.cover,
             ),
           ),
@@ -35,16 +38,15 @@ Widget bulidItem( article,context) {
               children: [
                 Expanded(
                   child: Text(
-                      // 'title',
+                    // 'title',
                     '${article['title']}',
                     style: Theme.of(context).textTheme.bodyText1,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-
                   ),
                 ),
                 Text(
-                   // 'date',
+                  // 'date',
                   '${article['publishedAt']}',
                   style: TextStyle(
                     color: Colors.grey,
@@ -74,12 +76,12 @@ Widget myDivider() => Padding(
     );
 
 Widget articleBuilder(list) => ConditionalBuilder(
-      condition: true ,//list.length > 0,
+      condition: true, //list.length > 0,
       builder: (context) => ListView.separated(
         physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) => bulidItem(list[index],context),
+        itemBuilder: (context, index) => bulidItem(list[index], context),
         separatorBuilder: (context, index) => myDivider(),
-        itemCount:  list.length,
-        ),
+        itemCount: list.length,
+      ),
       fallback: (context) => Center(child: CircularProgressIndicator()),
     );
