@@ -17,9 +17,9 @@ Widget bulidItem(article, context) {
             image: DecorationImage(
               image: NetworkImage(
                   (
-                      article['urlToImage'] == null ||
-                      article['urlToImage'] == ' '
-
+                      // article['urlToImage'] == null ||
+                      // article['urlToImage'] == ' '
+                      true
                   ? 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_01/2705191/nbc-social-default.png'
                   : article['urlToImage'])),
               fit: BoxFit.cover,
@@ -38,16 +38,16 @@ Widget bulidItem(article, context) {
               children: [
                 Expanded(
                   child: Text(
-                    // 'title',
-                    '${article['title']}',
+                    'title',
+                    // '${article['title']}',
                     style: Theme.of(context).textTheme.bodyText1,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Text(
-                  // 'date',
-                  '${article['publishedAt']}',
+                  'date',
+                  // '${article['publishedAt']}',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -79,9 +79,9 @@ Widget articleBuilder(list) => ConditionalBuilder(
       condition: true, //list.length > 0,
       builder: (context) => ListView.separated(
         physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) => bulidItem(list[index], context),
+        itemBuilder: (context, index) => bulidItem(list, context),
         separatorBuilder: (context, index) => myDivider(),
-        itemCount: list.length,
+        itemCount: 20 //  list.length,
       ),
       fallback: (context) => Center(child: CircularProgressIndicator()),
     );
