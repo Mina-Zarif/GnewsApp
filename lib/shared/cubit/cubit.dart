@@ -7,6 +7,7 @@ import 'package:hexcolor/hexcolor.dart';
 import '../../layout/business_Screen/businessScreen.dart';
 import '../../layout/science_Screen/scienceScreen.dart';
 import '../../layout/sports_Screen/sportScreen.dart';
+import '../network/local/cacheHelper.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitialStates());
@@ -37,17 +38,17 @@ class AppCubit extends Cubit<AppState> {
 
   bool isDark = true;
 
-  void changeTheme() {
-    isDark = !isDark;
-    if (isDark == true) {
-      emit(AppChangeThemeStateLight());
+  void changeTheme({fromShared}) {
+    if (fromShared != null) {
+      isDark = fromShared;
     } else {
+      isDark = !isDark;
 
-    }emit(AppChangeThemeStateDark());
+    }CacheHelper.putBoolean(key: 'isDark', value: isDark).then((value) {
+      emit(AppChangeThemeStateLight());
+    });
+
   }
-
-
-
 
   List<dynamic> business = [];
 
@@ -64,11 +65,11 @@ class AppCubit extends Cubit<AppState> {
     ).then((value) {
       //print(value.data['articles'][0]['title']);
       business = value.data['articles'];
-      print(business[0]['title']);
+      // print(business[0]['title']);
 
       emit(NewsGetBusinessSuccessState());
     }).catchError((error) {
-      print(error.toString());
+      // print(error.toString());
       emit(NewsGetBusinessErrorState(error.toString()));
     });
   }
@@ -89,11 +90,11 @@ class AppCubit extends Cubit<AppState> {
       ).then((value) {
         //print(value.data['articles'][0]['title']);
         sports = value.data['articles'];
-        print(sports[0]['title']);
+        // print(sports[0]['title']);
 
         emit(NewsGetSportsSuccessState());
       }).catchError((error) {
-        print(error.toString());
+        // print(error.toString());
         emit(NewsGetSportsErrorState(error.toString()));
       });
     } else {
@@ -117,7 +118,7 @@ class AppCubit extends Cubit<AppState> {
       ).then((value) {
         //print(value.data['articles'][0]['title']);
         science = value.data['articles'];
-        print(science[0]['title']);
+        // print(science[0]['title']);
 
         emit(NewsGetScienceSuccessState());
       }).catchError((error) {

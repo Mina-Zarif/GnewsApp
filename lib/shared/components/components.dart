@@ -76,7 +76,7 @@ Widget myDivider() => Padding(
     );
 
 Widget articleBuilder(list) => ConditionalBuilder(
-      condition: true, //list.length > 0,
+      condition: list.length > 0,
       builder: (context) => ListView.separated(
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) => bulidItem(list[index], context),
