@@ -15,11 +15,8 @@ Widget bulidItem(article, context) {
               10.0,
             ),
             image: DecorationImage(
-              image: NetworkImage(
-                  (
-                      article['urlToImage'] == null ||
+              image: NetworkImage((article['urlToImage'] == null ||
                       article['urlToImage'] == ' '
-
                   ? 'https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_01/2705191/nbc-social-default.png'
                   : article['urlToImage'])),
               fit: BoxFit.cover,
@@ -84,4 +81,44 @@ Widget articleBuilder(list) => ConditionalBuilder(
         itemCount: list.length,
       ),
       fallback: (context) => Center(child: CircularProgressIndicator()),
+    );
+
+Widget defaultFormField({
+  required TextEditingController controller,
+  required TextInputType type,
+  Function? onSubmit,
+  Function? onChange,
+  Function? onTap,
+  bool isPassword = false,
+  required Function validate,
+  required String label,
+  required IconData prefix,
+  IconData? suffix,
+  Function? suffixPressed,
+  bool isClickable = true,
+}) =>
+    TextFormField(
+      controller: controller,
+      keyboardType: type,
+      obscureText: isPassword,
+      enabled: isClickable,
+      onFieldSubmitted: onSubmit!(),
+      onChanged: onChange!(),
+      onTap: onTap!(),
+      validator: validate(),
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(
+          prefix,
+        ),
+        suffixIcon: suffix != null
+            ? IconButton(
+                onPressed: suffixPressed!(),
+                icon: Icon(
+                  suffix,
+                ),
+              )
+            : null,
+        border: OutlineInputBorder(),
+      ),
     );

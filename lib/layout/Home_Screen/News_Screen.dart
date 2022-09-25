@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gnews/layout/search_Screen/SearchScreen.dart';
 import 'package:gnews/shared/cubit/cubit.dart';
 import 'package:gnews/shared/cubit/states.dart';
 
@@ -22,7 +23,12 @@ class News_Screen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: IconButton(
-                        onPressed: (){},
+                        onPressed: (){
+
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SearchScreen(),));
+
+                        },
                         icon: Icon(Icons.search_sharp),
                       iconSize: 25,
                       // style: ButtonStyle(),

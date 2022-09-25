@@ -10,6 +10,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'layout/Home_Screen/News_Screen.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
 
   Bloc.observer = MyBlocObserver();
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
             ..getScience()
             ..changeTheme(fromShared: isDark),
         ),
+        BlocProvider(create: (context) => AppCubit(),),
 
         // BlocProvider(
         //     create: (BuildContext context) =>
