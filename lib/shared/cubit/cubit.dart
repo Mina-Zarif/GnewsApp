@@ -60,7 +60,7 @@ class AppCubit extends Cubit<AppState> {
       query: {
         'country': 'eg',
         'category': 'business',
-        'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+        'apiKey': 'd322d941f7614a09b34e5ae57da321a1',
       },
     ).then((value) {
       //print(value.data['articles'][0]['title']);
@@ -85,7 +85,7 @@ class AppCubit extends Cubit<AppState> {
         query: {
           'country': 'eg',
           'category': 'sports',
-          'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+          'apiKey': 'd322d941f7614a09b34e5ae57da321a1',
         },
       ).then((value) {
         //print(value.data['articles'][0]['title']);
@@ -113,13 +113,10 @@ class AppCubit extends Cubit<AppState> {
         query: {
           'country': 'eg',
           'category': 'science',
-          'apiKey': '65f7f556ec76449fa7dc7c0069f040ca',
+          'apiKey': 'd322d941f7614a09b34e5ae57da321a1',
         },
       ).then((value) {
-        //print(value.data['articles'][0]['title']);
         science = value.data['articles'];
-        // print(science[0]['title']);
-
         emit(NewsGetScienceSuccessState());
       }).catchError((error) {
         print(error.toString());
@@ -134,13 +131,12 @@ class AppCubit extends Cubit<AppState> {
   void getSearch(String value)
   {
     emit(NewsGetSearchLoadingState());
-
     DioHelper.getData(
       url: 'v2/everything',
       query:
       {
         'q':value,
-        'apiKey':'65f7f556ec76449fa7dc7c0069f040ca',
+        'apiKey':'d322d941f7614a09b34e5ae57da321a1',
       },
     ).then((value)
     {

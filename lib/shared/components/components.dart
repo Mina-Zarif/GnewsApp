@@ -72,53 +72,14 @@ Widget myDivider() => Padding(
       ),
     );
 
-Widget articleBuilder(list) => ConditionalBuilder(
-      condition: list.length > 0,
-      builder: (context) => ListView.separated(
+Widget articleBuilder(list,function) => ConditionalBuilder(
+        condition: list.length > 0,
+        builder: (context) => ListView.separated(
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) => bulidItem(list[index], context),
         separatorBuilder: (context, index) => myDivider(),
         itemCount: list.length,
       ),
-      fallback: (context) => Center(child: CircularProgressIndicator()),
+      fallback: (context) => function,
     );
 
-Widget defaultFormField({
-  required TextEditingController controller,
-  required TextInputType type,
-  Function? onSubmit,
-  Function? onChange,
-  Function? onTap,
-  bool isPassword = false,
-  required Function validate,
-  required String label,
-  required IconData prefix,
-  IconData? suffix,
-  Function? suffixPressed,
-  bool isClickable = true,
-}) =>
-    TextFormField(
-      controller: controller,
-      keyboardType: type,
-      obscureText: isPassword,
-      enabled: isClickable,
-      onFieldSubmitted: onSubmit!(),
-      onChanged: onChange!(),
-      onTap: onTap!(),
-      validator: validate(),
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(
-          prefix,
-        ),
-        suffixIcon: suffix != null
-            ? IconButton(
-                onPressed: suffixPressed!(),
-                icon: Icon(
-                  suffix,
-                ),
-              )
-            : null,
-        border: OutlineInputBorder(),
-      ),
-    );

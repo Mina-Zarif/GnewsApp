@@ -37,11 +37,7 @@ class MyApp extends StatelessWidget {
             ..getScience()
             ..changeTheme(fromShared: isDark),
         ),
-        BlocProvider(create: (context) => AppCubit(),),
 
-        // BlocProvider(
-        //     create: (BuildContext context) =>
-        //         AppCubit()..changeTheme(fromShared: isDark)),
       ],
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
@@ -53,10 +49,9 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               titleSpacing: 20.0,
               // ignore: deprecated_member_use
-              backwardsCompatibility: false,
+              // backwardsCompatibility: false,
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Colors.white,
-                // statusBarBrightness: Brightness.dark,
                 statusBarIconBrightness: Brightness.dark,
               ),
               backgroundColor: Colors.white,
@@ -88,13 +83,14 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+
           darkTheme: ThemeData(
             primarySwatch: Colors.deepOrange,
             scaffoldBackgroundColor: HexColor('333739'),
             appBarTheme: AppBarTheme(
               titleSpacing: 20.0,
               // ignore: deprecated_member_use
-              backwardsCompatibility: false,
+              // backwardsCompatibility: true,
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: HexColor('333739'),
                 statusBarIconBrightness: Brightness.light,
@@ -120,6 +116,7 @@ class MyApp extends StatelessWidget {
               elevation: 20.0,
               backgroundColor: HexColor('333739'),
             ),
+
             textTheme: TextTheme(
               bodyText1: TextStyle(
                 fontSize: 18.0,
