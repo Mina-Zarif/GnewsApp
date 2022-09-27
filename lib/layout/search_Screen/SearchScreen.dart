@@ -21,7 +21,9 @@ class SearchScreen extends StatelessWidget {
           appBar: AppBar(
             leading: Icon(Icons.search_sharp),
             title: TextFormField(
+              style: TextStyle(color: Colors.grey),
               controller: AppCubit.get(context).searchController,
+
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 AppCubit.get(context).getSearch(value);
