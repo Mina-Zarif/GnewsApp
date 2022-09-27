@@ -8,29 +8,30 @@ import '../../shared/components/components.dart';
 class SearchScreen extends StatelessWidget {
   // const SearchScreen({Key? key}) : super(key: key);
 
-  var searchController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
+    var list = AppCubit.get(context).search;
+
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},
       builder: (context, state) {
-
-        var list = AppCubit.get(context).search;
         return Scaffold(
           appBar: AppBar(
             leading: Icon(Icons.search_sharp),
             title: TextFormField(
-
-              controller: searchController,
+              controller: AppCubit.get(context).searchController,
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 AppCubit.get(context).getSearch(value);
-              },
+                print(value);
+                print('text ${AppCubit.get(context).searchController.text}');
+                },
               decoration: InputDecoration(
-                // prefix: Icon(Icons.search_sharp),
-                hintText: 'Search...',
-                hintStyle: TextStyle(color: Colors.grey),
+
+              hintText: 'Search...',
+              hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
 

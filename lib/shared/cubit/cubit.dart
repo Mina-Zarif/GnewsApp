@@ -1,3 +1,4 @@
+import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ class AppCubit extends Cubit<AppState> {
 
   static AppCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
-
+  var searchController = TextEditingController();
   List<BottomNavigationBarItem> bottomsItems = [
     BottomNavigationBarItem(icon: Icon(Icons.business), label: 'business'),
     BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: 'sports'),
@@ -37,7 +38,6 @@ class AppCubit extends Cubit<AppState> {
   }
 
   bool isDark = true;
-
   void changeTheme({fromShared}) {
     if (fromShared != null) {
       isDark = fromShared;
@@ -128,23 +128,29 @@ class AppCubit extends Cubit<AppState> {
   }
 
   List<dynamic> search = [];
+  // ignore: non_constant_identifier_names
+  late String Value ;
   void getSearch(String value)
   {
+
     emit(NewsGetSearchLoadingState());
     DioHelper.getData(
       url: 'v2/everything',
       query:
       {
-        'q':value,
+        'q': value,
         'apiKey':'d322d941f7614a09b34e5ae57da321a1',
       },
     ).then((value)
     {
-      search = value.data['articles'];
+      search = (value.data['articles']) ;
+      Value = value.toString();
       emit(NewsGetSearchSuccessState());
+
     }).catchError((error){
       print(error.toString());
       emit(NewsGetSearchErrorState(error.toString()));
     });
+
   }
 }

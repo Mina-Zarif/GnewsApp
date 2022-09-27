@@ -43,6 +43,11 @@ class NewsGetSearchErrorState extends AppState{
   NewsGetSearchErrorState(this.error);
 }
 
-class NewsGetSearchSuccessState extends AppState{}
+class NewsGetSearchSuccessState extends AppState{
 
-class NewsGetSearchLoadingState extends AppState{}
+}
+
+class NewsGetSearchLoadingState extends AppState{
+  // final String Value;
+  // NewsGetSearchLoadingState(this.Value);
+}
