@@ -10,9 +10,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'layout/Home_Screen/News_Screen.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
@@ -28,17 +26,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AppCubit()
-            ..getBusiness()
-            ..getSports()
-            ..getScience()
-            ..changeTheme(fromShared: isDark),
-        ),
-
-      ],
+    return BlocProvider(
+      create: (context) => AppCubit()
+        ..getBusiness()
+        ..getSports()
+        ..getScience()
+        ..changeTheme(fromShared: isDark),
       child: BlocConsumer<AppCubit, AppState>(
         listener: (context, state) {},
         builder: (context, state) => MaterialApp(
@@ -49,7 +42,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               titleSpacing: 20.0,
               // ignore: deprecated_member_use
-              // backwardsCompatibility: false,
+              backwardsCompatibility: false,
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Colors.white,
                 statusBarIconBrightness: Brightness.dark,
@@ -83,14 +76,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-
           darkTheme: ThemeData(
             primarySwatch: Colors.deepOrange,
             scaffoldBackgroundColor: HexColor('333739'),
             appBarTheme: AppBarTheme(
               titleSpacing: 20.0,
               // ignore: deprecated_member_use
-              // backwardsCompatibility: true,
+              backwardsCompatibility: false,
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: HexColor('333739'),
                 statusBarIconBrightness: Brightness.light,
@@ -116,7 +108,6 @@ class MyApp extends StatelessWidget {
               elevation: 20.0,
               backgroundColor: HexColor('333739'),
             ),
-
             textTheme: TextTheme(
               bodyText1: TextStyle(
                 fontSize: 18.0,

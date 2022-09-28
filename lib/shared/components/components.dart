@@ -1,13 +1,19 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:gnews/shared/cubit/cubit.dart';
 
 import '../../layout/WebVeiw_Screen/WebVeiw.dart';
 
 Widget bulidItem(article, context) {
   return InkWell(
     onTap: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => WebView_Screen(article['url']),));
+      Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => WebView_Screen(article['url']),
+          )
+      );
     },
     child: Padding(
       padding: const EdgeInsets.all(20.0),
@@ -50,7 +56,10 @@ Widget bulidItem(article, context) {
                   ),
                   Text(
                     // 'date',
-                    '${article['publishedAt']}',
+                    article['publishedAt'].toString()
+                        .substring(0,
+                        article['publishedAt'].toString().indexOf('T')
+                     ),
                     style: TextStyle(
                       color: Colors.grey,
                     ),
@@ -68,23 +77,24 @@ Widget bulidItem(article, context) {
   );
 }
 
-Widget myDivider() => Padding(
+Widget myDivider(context) => Padding(
       padding: const EdgeInsetsDirectional.only(
         start: 20.0,
       ),
-      child: SizedBox(
+      child: Container(
         width: double.infinity,
+        // color: AppCubit.get(context).isDark ? Colors.black:Colors.white ,
         height: 1.0,
-        // color: Colors.grey[300],
+
       ),
     );
 
-Widget articleBuilder(list,function) => ConditionalBuilder(
+Widget articleBuilder(list,context,function) => ConditionalBuilder(
         condition: list.length > 0,
         builder: (context) => ListView.separated(
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) => bulidItem(list[index], context),
-        separatorBuilder: (context, index) => myDivider(),
+        separatorBuilder: (context, index) => myDivider(context),
         itemCount: list.length,
       ),
       fallback: (context) => function,

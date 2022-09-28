@@ -43,6 +43,7 @@ class SearchScreen extends StatelessWidget {
             children: [
               Expanded(child: articleBuilder(
                 list,
+                context,
                 Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
