@@ -84,6 +84,7 @@ Widget myDivider(context) => Padding(
       child: Container(
         width: double.infinity,
         // color: AppCubit.get(context).isDark ? Colors.black:Colors.white ,
+        color: Colors.grey,
         height: 1.0,
 
       ),
