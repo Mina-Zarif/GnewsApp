@@ -49,7 +49,12 @@ Widget bulidItem(article, context) {
                     child: Text(
                       // 'title',
                       '${article['title']}',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: //Theme.of(context).textTheme.bodyText1,
+                      TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w600,
+                        color: AppCubit.get(context).isDark? Colors.black:Colors.white,
+                      ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
