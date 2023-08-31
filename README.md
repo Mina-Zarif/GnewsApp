@@ -1,6 +1,7 @@
 # gnews
 
-A new Flutter project.
+News app.
+
 
 ## Getting Started
 
